@@ -94,3 +94,39 @@ def is_admin(user):
 def admin_view(request):
     return render(request, 'admin_view.html')
 
+def is_librarian(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Librarian'
+
+@user_passes_test(is_librarian)
+def librarian_view(request):
+    return render(request, 'librarian_view.html')
+
+def is_member(user):
+    return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
+
+@user_passes_test(is_member)
+def member_view(request):
+    return render(request, 'member_view.html')
+
+@user_passes_test(is_member)
+def member_view(request):
+    return render(request, 'member_view.html')
+
+from django.contrib.auth.decorators import permission_required
+
+@permission_required('relationship_app.can_add_book')
+def add_book_view(request):
+    # Your logic for adding a book
+    return render(request, 'add_book.html')
+
+@permission_required('relationship_app.can_change_book')
+def edit_book_view(request, book_id):
+    # Your logic for editing a book
+    return render(request, 'edit_book.html')
+
+@permission_required('relationship_app.can_delete_book')
+def delete_book_view(request, book_id):
+    # Your logic for deleting a book
+    return render(request, 'delete_book.html')
+
+
