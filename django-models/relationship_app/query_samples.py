@@ -11,12 +11,12 @@ def query_all_books_by_author(author_name):
     books = Book.objects.filter(author__name=author_name)
     return books
 
-def list_all_books_in_library(library_id):
-    library = Library.objects.get(id=library_id)
+def list_all_books_in_library(library_name):
+    library = Library.objects.get(name=library_name)
     return library.books.all()
 
-def retrieve_librarian_for_library(library_id):
-    librarian = Librarian.objects.get(library__id=library_id)
+def retrieve_librarian_for_library(library_name):
+    librarian = Librarian.objects.get(library__name=library_name)
     return librarian
 
 if __name__ == "__main__":
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     author_name = "Author Name"  # Replace with a valid author name
     print("Books by author:", query_all_books_by_author(author_name))
 
-    library_id = 1  # Replace with a valid library ID
-    print("Books in library:", list_all_books_in_library(library_id))
+    library_name = "Library Name"  # Replace with a valid library name
+    print("Books in library:", list_all_books_in_library(library_name))
 
-    print("Librarian for library:", retrieve_librarian_for_library(library_id))
+    print("Librarian for library:", retrieve_librarian_for_library(library_name))
