@@ -129,4 +129,14 @@ def delete_book_view(request, book_id):
     # Your logic for deleting a book
     return render(request, 'delete_book.html')
 
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render
+from django.http import HttpResponseForbidden
+
+# Utility function to check the user's role
+def is_admin(user):
+    return user.userprofile.role == 'Admin'
+
+def is_librarian
+
 

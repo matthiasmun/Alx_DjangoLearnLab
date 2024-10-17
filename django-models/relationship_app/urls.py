@@ -95,3 +95,18 @@ urlpatterns = [
     # Other URL patterns
 ]
 
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    # Views for role-based access
+    path('admin/', views.admin_view, name='admin_view'),
+    path('librarian/', views.librarian_view, name='librarian_view'),
+    path('member/', views.member_view, name='member_view'),
+
+    # Paths for adding and editing books
+    path('add_book/', views.add_book, name='add_book'),
+    path('edit_book/<int:pk>/', views.edit_book, name='edit_book'),
+]
+
+
