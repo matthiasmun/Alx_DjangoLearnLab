@@ -52,5 +52,6 @@ def add_book(request):
     # Logic to add a book
     return render(request, 'bookshelf/add_book.html')
 
+relationship_app/list_books.html
 
 
