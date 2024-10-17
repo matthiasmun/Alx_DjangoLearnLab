@@ -8,16 +8,28 @@ django.setup()
 from relationship_app.models import Book, Library, Librarian, Author
 
 def query_all_books_by_author(author_name):
-    books = Book.objects.filter(author__name=author_name)
-    return books
+    # Retrieve the author instance
+    try:
+        author = Author.objects.get(name=author_name)
+        # Query all books by this author
+        books = Book.objects.filter(author=author)
+        return books
+    except Author.DoesNotExist:
+        return f"No author found with the name: {author_name}"
 
 def list_all_books_in_library(library_name):
-    library = Library.objects.get(name=library_name)
-    return library.books.all()
+    try:
+        library = Library.objects.get(name=library_name)
+        return library.books.all()
+    except Library.DoesNotExist:
+        return f"No library found with the name: {library_name}"
 
 def retrieve_librarian_for_library(library_name):
-    librarian = Librarian.objects.get(library__name=library_name)
-    return librarian
+    try:
+        librarian = Librarian.objects.get(library__name=library_name)
+        return librarian
+    except Librarian.DoesNotExist:
+        return f"No librarian found for the library: {library_name}"
 
 if __name__ == "__main__":
     # Example usages
