@@ -84,4 +84,37 @@ urlpatterns = [
 ]
 
 
+# posts/views.py
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.generics import get_object_or_404
+from .models import Post, Like
+from notifications.models import Notification
+from rest_framework.permissions import IsAuthenticated
+
+class LikePostView(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, pk=None):
+        post = get_object_or_404(Post, pk=pk)  # Use get_object_or_404
+        like, created = Like.objects.get_or_create(user=request.user, post=post)
+        if created:
+            # Create a notification for the user
+            Notification.objects.create(
+                recipient=post.user,
+                actor=request.user,
+                verb='liked your post',
+                target=post
+            )
+            return Response({'status': 'liked'}, status=status.HTTP_201_CREATED)
+        return Response({'status': 'already liked'}, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        post = get_object_or_404(Post, pk=pk)  # Use get_object_or_404
+        like = Like.objects.filter(user=request.user, post=post)
+        if like.exists():
+            like.delete()
+            return Response({'status': 'unliked'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'status': 'not liked'}, status=status.HTTP_400_BAD_REQUEST)
+
 
