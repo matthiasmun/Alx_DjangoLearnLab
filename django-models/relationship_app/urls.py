@@ -19,3 +19,26 @@ from . import views
 urlpatterns = [
     path('books/', views.list_books, name='list_books'),
 ]
+
+# urls.py
+from django.urls import path
+from .views import list_books, LibraryDetailView
+
+urlpatterns = [
+    path('books/', list_books, name='list_books'),
+    path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
+    # Other paths can go here
+
+]
+
+urlpatterns = [
+    path('admin/', admin_view, name='admin_view'),
+    # Add other role views here
+]
+
+urlpatterns = [
+    path('add-book/', add_book, name='add_book'),
+    # Add other actions for edit/delete
+]
+
+
