@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
+<<<<<<< HEAD
+=======
 
 from django.contrib import admin
 from .models import Book
@@ -16,3 +18,4 @@ from .models import Book
 
 # Register the Book model with the admin site
 admin.site.register(Book)
+>>>>>>> eafbf58 (Add initial Django project files)
