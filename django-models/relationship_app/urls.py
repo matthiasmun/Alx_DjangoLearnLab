@@ -18,6 +18,7 @@ from . import views
 
 urlpatterns = [
     path('books/', views.list_books, name='list_books'),
+
 ]
 
 # urls.py
@@ -72,4 +73,8 @@ urlpatterns = [
 ]
 
 
+urlpatterns = [
+    path('admin/', views.admin_view, name='admin_view'),
+    # Other role-based views
+]
 
