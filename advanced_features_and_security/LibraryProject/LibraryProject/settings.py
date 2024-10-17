@@ -46,6 +46,16 @@ X_FRAME_OPTIONS = 'DENY'  # Prevents clickjacking
 SECURE_CONTENT_TYPE_NOSNIFF = True
 CSRF_COOKIE_SECURE = True  # Ensures CSRF cookies are sent over HTTPS
 SESSION_COOKIE_SECURE = True  # Ensures session cookies are sent over HTTPS
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 31536000  # One year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+
 
 
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
@@ -128,6 +138,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 
 
 
