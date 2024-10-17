@@ -13,3 +13,20 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    # as defined earlier
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
+
