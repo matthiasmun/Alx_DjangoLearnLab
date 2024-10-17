@@ -60,4 +60,6 @@ from django.views.generic.detail import DetailView
 
 from django.contrib.auth import login
 
+"views.register", "LogoutView.as_view(template_name=", "LoginView.as_view(template_name="]
+
 
