@@ -1,22 +1,19 @@
-# accounts/views.py
-from django.shortcuts import render
-from rest_framework.authtoken.models import Token
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-from .models import CustomUser
-from .serializers import UserSerializer
+from rest_framework import viewsets
+from .models import Post, Comment, Follow
+from .serializers import PostSerializer, CommentSerializer, FollowSerializer
+from rest_framework.permissions import IsAuthenticated
 
-class RegisterUser(APIView):
-    def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticated]
 
-# Placeholder for the login view
-class UserLoginView(APIView):
-    # Define login functionality here
-    pass
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
+
+class FollowViewSet(viewsets.ModelViewSet):
+    queryset = Follow.objects.all()
+    serializer_class = FollowSerializer
+    permission_classes = [IsAuthenticated]

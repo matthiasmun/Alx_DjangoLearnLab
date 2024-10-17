@@ -1,8 +1,12 @@
-# accounts/urls.py
-from django.urls import path
-from .views import RegisterUser, UserLoginView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import PostViewSet, CommentViewSet, FollowViewSet
+
+router = DefaultRouter()
+router.register(r'posts', PostViewSet)
+router.register(r'comments', CommentViewSet)
+router.register(r'follow', FollowViewSet)
 
 urlpatterns = [
-    path('register/', RegisterUser.as_view(), name='register'),
-    path('login/', UserLoginView.as_view(), name='login'),  # Add functionality to UserLoginView
+    path('', include(router.urls)),  # Include router URLs
 ]

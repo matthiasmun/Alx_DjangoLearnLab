@@ -1,15 +1,17 @@
-# accounts/serializers.py
 from rest_framework import serializers
-from .models import CustomUser  # Ensure CustomUser is correctly imported
+from .models import Post, Comment, Follow
 
-class UserSerializer(serializers.ModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CustomUser  # Use CustomUser
-        fields = ['id', 'username', 'email', 'password']
-        extra_kwargs = {
-            'password': {'write_only': True}
-        }
-    
-    def create(self, validated_data):
-        user = CustomUser.objects.create_user(**validated_data)
-        return user
+        model = Post
+        fields = '__all__'
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+        fields = '__all__'
