@@ -1,14 +1,13 @@
-# Admin Setup for Book Model
+# Integrating the Book Model with Django Admin Interface
 
-**Step 1:** Open `bookshelf/admin.py`.
+## Objective
+Enhance the bookshelf app by integrating the Book model with the Django admin interface, allowing for efficient data management.
 
-**Step 2:** Register the `Book` model with the following code:
-```python
-from django.contrib import admin
-from .models import Book
+## Steps
 
-@admin.register(Book)
-class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'publication_year')
-    search_fields = ('title', 'author')
-    list_filter = ('publication_year',)
+### 1. Register the Book Model
+- Open `bookshelf/admin.py`.
+- Import the Book model and admin components:
+  ```python
+  from django.contrib import admin
+  from .models import Book
