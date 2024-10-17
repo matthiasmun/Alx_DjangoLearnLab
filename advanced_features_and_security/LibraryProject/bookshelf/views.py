@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404, render
 from .models import Book
+from .forms import ExampleForm
+
 
 @permission_required('bookshelf.can_edit', raise_exception=True)
 def edit_book(request, book_id):
